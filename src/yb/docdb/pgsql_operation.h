@@ -144,14 +144,15 @@ class PgsqlReadOperation : public DocExprExecutor {
   // - Batch argument: The query condition is represented by many sets of values. For example, a
   //   batch protobuf will carry many ybctids.
   //     SELECT ... WHERE ybctid IN (y1, y2, y3)
-  Result<size_t> Execute(const YQLStorageIf& ql_storage,
-                         CoarseTimePoint deadline,
-                         const ReadHybridTime& read_time,
-                         bool is_explicit_request_read_time,
-                         const DocReadContext& doc_read_context,
-                         const DocReadContext* index_doc_read_context,
-                         faststring *result_buffer,
-                         HybridTime *restart_read_ht);
+  Result<size_t> Execute(
+      const YQLStorageIf& ql_storage,
+      CoarseTimePoint deadline,
+      const ReadHybridTime& read_time,
+      bool is_explicit_request_read_time,
+      const DocReadContext& doc_read_context,
+      const DocReadContext* index_doc_read_context,
+      faststring* result_buffer,
+      HybridTime* restart_read_ht);
 
   CHECKED_STATUS GetTupleId(QLValuePB *result) const override;
 
@@ -159,15 +160,16 @@ class PgsqlReadOperation : public DocExprExecutor {
 
  private:
   // Execute a READ operator for a given scalar argument.
-  Result<size_t> ExecuteScalar(const YQLStorageIf& ql_storage,
-                               CoarseTimePoint deadline,
-                               const ReadHybridTime& read_time,
-                               bool is_explicit_request_read_time,
-                               const DocReadContext& doc_read_context,
-                               const DocReadContext *index_doc_read_context,
-                               faststring *result_buffer,
-                               HybridTime *restart_read_ht,
-                               bool *has_paging_state);
+  Result<size_t> ExecuteScalar(
+      const YQLStorageIf& ql_storage,
+      CoarseTimePoint deadline,
+      const ReadHybridTime& read_time,
+      bool is_explicit_request_read_time,
+      const DocReadContext& doc_read_context,
+      const DocReadContext* index_doc_read_context,
+      faststring* result_buffer,
+      HybridTime* restart_read_ht,
+      bool *has_paging_state);
 
   // Execute a READ operator for a given batch of ybctids.
   Result<size_t> ExecuteBatchYbctid(const YQLStorageIf& ql_storage,

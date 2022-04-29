@@ -261,6 +261,15 @@ class PgDocOp : public std::enable_shared_from_this<PgDocOp> {
 
   CHECKED_STATUS CreateRequests();
 
+  uint64 getOpsScannedRowsSum() const {
+    uint64 sum = 0;
+    for (const auto& pgsql_op : pgsql_ops_) {
+      auto res = pgsql_op->response();
+      sum += res->has_docdb_scanned_rows() ? res->docdb_scanned_rows() : 0;
+    }
+    return sum;
+  }
+
  protected:
   uint64_t& GetReadTime();
 

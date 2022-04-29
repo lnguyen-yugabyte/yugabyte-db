@@ -391,6 +391,7 @@ Result<bool> PgDml::FetchDataFromServer() {
 
     // Get the rowsets from doc-operator.
     RETURN_NOT_OK(doc_op_->GetResult(&rowsets_));
+    LOG(WARNING) << "### scanned rows " << doc_op_->getOpsScannedRowsSum();
   }
 
   // Return the output parameter back to Postgres if server wants.

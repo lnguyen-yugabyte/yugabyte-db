@@ -54,6 +54,8 @@ SeqNext(SeqScanState *node)
 	ScanDirection direction;
 	TupleTableSlot *slot;
 
+    ereport(WARNING, (errmsg("### start SeqNext \n")));
+
 	/*
 	 * get information from the estate and scan state
 	 */
